@@ -1,0 +1,36 @@
+{
+  "name": "sequelize-replace-enum-postgres",
+  "version": "1.2.0",
+  "description": "This package provides the methods needed to replace a PostgreSQL ENUM in Sequelize migrations.",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -D -s -d build",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abelosorio/sequelize_replace_enum_postgres.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "PostgreSQL",
+    "ENUM",
+    "Migration",
+    "Sequelize"
+  ],
+  "author": "Abel M. Osorio <abel.m.osorio@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abelosorio/sequelize_replace_enum_postgres/issues"
+  },
+  "homepage": "https://github.com/abelosorio/sequelize_replace_enum_postgres#readme",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
+  }
+}
