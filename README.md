@@ -5,7 +5,7 @@ This package provides the methods needed to replace a **PostgreSQL** ENUM in **S
 ## Install
 
 ```
-npm install --save replace-enum-postgresql
+npm install --save sequelize-replace-enum-postgres
 ```
 
 ## How to use
@@ -15,7 +15,7 @@ In this migration we are adding the `on-demand` value to the `recurrenceType` fi
 ```
 'use strict';
 
-const replaceEnum = require('replace-enum-postgresql').default;
+const replaceEnum = require('sequelize-replace-enum-postgres').default;
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -49,4 +49,4 @@ module.exports = {
 
 ## Issues
 
-  * https://github.com/abelosorio/replace_enum_postgresql/issues
+  * https://github.com/abelosorio/sequelize_replace_enum_postgres/issues
