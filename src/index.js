@@ -257,6 +257,6 @@ export function getQueryToSetColumnDefault(tableName, columnName, defaultValue, 
   return `
     ALTER TABLE "${tableName}"
       ALTER COLUMN "${columnName}"
-        SET DEFAULT '${defaultValue}'::${defaultValueType}
+        SET DEFAULT '${defaultValue}'::"${defaultValueType}"
   `;
 }
