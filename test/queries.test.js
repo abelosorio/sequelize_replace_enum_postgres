@@ -1,5 +1,6 @@
 import mocha from 'mocha';
 import assert from 'assert';
+import { removeWhiteSpace } from './utils/testUtils'
 import {
 	getQueryToCreateEnum,
 	getQueryToDropEnum,
@@ -44,7 +45,3 @@ describe('queries:', () => {
 		assert.equal(sql, ` ALTER TABLE "table1" ALTER COLUMN "column1" SET DEFAULT 'defaultVal1'::"STRING" `);
 	});
 });
-
-function removeWhiteSpace(str) {
-	return str.replace(/\s/g, ' ').replace(/ +(?= )/g, '');
-}
