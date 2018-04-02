@@ -62,7 +62,7 @@ export default (args) => {
         sequelizeOptions
       }));
   });
-}
+};
 
 /**
  * Create a new ENUM.
