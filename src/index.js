@@ -33,7 +33,7 @@ export default (args) => {
       { queryInterface, name: newEnumName, values: newValues, sequelizeOptions }
     )
       // Drop default value (ALTER COLUMN cannot cast default values)
-      .then(() => unsetDefaultValueFromEnum(
+      .then(() => defaultValue && unsetDefaultValueFromEnum(
         { queryInterface, tableName, columnName, sequelizeOptions }
       ))
       // Change column type to the new ENUM TYPE
@@ -53,7 +53,7 @@ export default (args) => {
         queryInterface,
         sequelizeOptions
       }))
-      .then(() => setColumnDefault({
+      .then(() => defaultValue && setColumnDefault({
         tableName,
         columnName,
         defaultValue,
