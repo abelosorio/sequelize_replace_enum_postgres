@@ -1,6 +1,6 @@
 {
   "name": "sequelize-replace-enum-postgres",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "This package provides the methods needed to replace a PostgreSQL ENUM in Sequelize migrations.",
   "main": "build/index.js",
   "scripts": {
@@ -11,7 +11,9 @@
     "lint:fix": "eslint --fix src",
     "prepublishOnly": "npm run build"
   },
-  "pre-commit": ["lint"],
+  "pre-commit": [
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abelosorio/sequelize_replace_enum_postgres.git"
