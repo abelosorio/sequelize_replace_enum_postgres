@@ -5,6 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "test": "mocha --require babel-core/register --require babel-polyfill",
+    "test:watch": "npm run test -- --watch",
     "build": "babel src -D -s -d build",
     "lint": "eslint src test",
     "lint:fix": "eslint --fix src",
