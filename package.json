@@ -6,10 +6,11 @@
   "scripts": {
     "test": "mocha --require babel-core/register --require babel-polyfill",
     "build": "babel src -D -s -d build",
-    "lint": "eslint src",
+    "lint": "eslint src test",
     "lint:fix": "eslint --fix src",
     "prepublishOnly": "npm run build"
   },
+  "pre-commit": ["lint"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abelosorio/sequelize_replace_enum_postgres.git"
