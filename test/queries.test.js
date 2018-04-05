@@ -23,7 +23,10 @@ describe('queries:', () => {
 
   it('getQueryToRemoveDefaultFromColumn()', () => {
     const sql = getQueryToRemoveDefaultFromColumn('enum1', 'column1');
-    assert.equal(sql, `ALTER TABLE "enum1" ALTER COLUMN "column1" DROP DEFAULT`);
+    assert.equal(
+      sql,
+      `ALTER TABLE "enum1" ALTER COLUMN "column1" DROP DEFAULT`
+    );
   });
 
   it('getQueryToRenameEnum()', () => {
@@ -32,15 +35,25 @@ describe('queries:', () => {
   });
 
   it('getQueryToSetEnumType()', () => {
-    const sql = removeWhiteSpace(getQueryToSetEnumType('table1', 'column1', 'enum1'));
+    const sql =
+      removeWhiteSpace(getQueryToSetEnumType('table1', 'column1', 'enum1'));
+
     assert.equal(
       sql,
-      ` ALTER TABLE "table1" ALTER COLUMN "column1" TYPE "enum1" USING ("column1"::text::"enum1") `
+      ` ALTER TABLE "table1" ALTER COLUMN "column1" TYPE "enum1"` +
+        ` USING ("column1"::text::"enum1") `
     );
   });
 
   it('getQueryToSetColumnDefault()', () => {
-    const sql = removeWhiteSpace(getQueryToSetColumnDefault('table1', 'column1', 'defaultVal1', 'STRING'));
-    assert.equal(sql, ` ALTER TABLE "table1" ALTER COLUMN "column1" SET DEFAULT 'defaultVal1'::"STRING" `);
+    const sql = removeWhiteSpace(
+      getQueryToSetColumnDefault('table1', 'column1', 'defaultVal1', 'STRING')
+    );
+
+    assert.equal(
+      sql,
+      ` ALTER TABLE "table1" ALTER COLUMN "column1"` +
+        ` SET DEFAULT 'defaultVal1'::"STRING" `
+    );
   });
 });
