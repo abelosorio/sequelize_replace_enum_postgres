@@ -6,6 +6,8 @@
   "scripts": {
     "test": "mocha --require babel-core/register --require babel-polyfill",
     "build": "babel src -D -s -d build",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
     "prepublishOnly": "npm run build"
   },
   "repository": {
