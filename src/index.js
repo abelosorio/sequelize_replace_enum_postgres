@@ -253,7 +253,12 @@ export function setColumnDefault(args) {
  *
  * @return {String}
  */
-export function getQueryToSetColumnDefault(tableName, columnName, defaultValue, defaultValueType) {
+export function getQueryToSetColumnDefault(
+  tableName,
+  columnName,
+  defaultValue,
+  defaultValueType
+) {
   return `
     ALTER TABLE "${tableName}"
       ALTER COLUMN "${columnName}"
