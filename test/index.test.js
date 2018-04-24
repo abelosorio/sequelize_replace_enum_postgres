@@ -2,10 +2,29 @@
 /* eslint-disable require-jsdoc */
 
 import assert from 'assert';
+import sinon from 'sinon';
 import { removeWhiteSpace } from './utils/testUtils';
 import replaceEnum from '../src/index';
 
 describe('replaceEnum() - enum replacement:', () => {
+  // eslint-disable-next-line max-len
+  it('should return the result of calling to queryInterface.sequelize.transaction', async () => {
+    const queryInterface = queryInterfaceMock();
+
+    const transactionSpy = sinon.spy(queryInterface.sequelize, 'transaction');
+
+    await replaceEnum({
+      queryInterface,
+      tableName: 'table1',
+      columnName: 'column1',
+      defaultValue: 'A',
+      newValues: ['A', 'B', 'C'],
+      enumName: 'enum1'
+    });
+
+    assert.equal(transactionSpy.calledOnce, true);
+  });
+
   it('should pass correct queries to queryInterface', async () => {
     const queryInterface = queryInterfaceMock();
     await replaceEnum({
