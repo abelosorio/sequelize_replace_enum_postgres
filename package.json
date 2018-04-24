@@ -7,8 +7,12 @@
     "test": "mocha --require babel-core/register --require babel-polyfill",
     "test:watch": "npm run test -- --watch",
     "build": "babel src -D -s -d build",
-    "lint": "eslint src test",
-    "lint:fix": "eslint --fix src",
+    "lint:src": "eslint src",
+    "lint:src:fix": "npm run lint:src -- --fix",
+    "lint:test": "eslint test --config .eslintrc.test.js",
+    "lint:test:fix": "npm run lint:test -- --fix",
+    "lint": "npm run lint:src && npm run lint:test",
+    "lint:fix": "npm run lint:src:fix && npm run lint:test:fix",
     "prepublishOnly": "npm run build"
   },
   "pre-commit": [
