@@ -1,5 +1,7 @@
 # Replace ENUM PostgreSQL
 
+[![Build Status](https://travis-ci.org/abelosorio/sequelize_replace_enum_postgres.svg?branch=master)](https://travis-ci.org/abelosorio/sequelize_replace_enum_postgres) [![NPM version](https://img.shields.io/npm/v/sequelize-replace-enum-postgres.svg)](https://www.npmjs.com/package/sequelize-replace-enum-postgres)
+
 This package provides the methods needed to replace a **PostgreSQL** ENUM in **Sequelize** migrations.
 
 ## Install
