@@ -4,7 +4,7 @@
   "description": "This package provides the methods needed to replace a PostgreSQL ENUM in Sequelize migrations.",
   "main": "build/index.js",
   "scripts": {
-    "test": "mocha --require babel-core/register --require babel-polyfill",
+    "test": "mocha",
     "test:watch": "npm run test -- --watch",
     "build": "babel src -D -s -d build",
     "lint:src": "eslint src",
