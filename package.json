@@ -1,6 +1,6 @@
 {
   "name": "sequelize-replace-enum-postgres",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "This package provides the methods needed to replace a PostgreSQL ENUM in Sequelize migrations.",
   "main": "build/index.js",
   "scripts": {
