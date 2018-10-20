@@ -5,7 +5,7 @@ import { removeWhiteSpace } from './utils/testUtils';
 import replaceEnum from '../src/index';
 
 describe('replaceEnum() - enum replacement:', () => {
-  it('should return the result of calling to queryInterface.sequelize.transaction', async () => {
+  it('should run all queries within a transaction', async () => {
     const queryInterface = queryInterfaceMock();
 
     const transactionSpy = sinon.spy(queryInterface.sequelize, 'transaction');
@@ -24,6 +24,7 @@ describe('replaceEnum() - enum replacement:', () => {
 
   it('should pass correct queries to queryInterface', async () => {
     const queryInterface = queryInterfaceMock();
+
     await replaceEnum({
       queryInterface,
       tableName: 'table1',
