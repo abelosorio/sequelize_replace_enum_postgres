@@ -20,40 +20,54 @@ export default (args) => {
     defaultValue,
     newValues,
     queryInterface,
+    sequelizeOptions = {},
     enumName = `enum_${tableName}_${columnName}`
   } = args;
 
   const newEnumName = `${enumName}_new`;
 
-  return queryInterface.sequelize.transaction((t) => {
-    const sequelizeOptions = { transaction: t };
+  return queryInterface.sequelize.transaction(sequelizeOptions, (t) => {
+    const newSequelizeOptions = {
+      ...(sequelizeOptions || {}),
+      transaction: t
+    };
 
     // Create a copy of the type
-    return createEnum(
-      { queryInterface, name: newEnumName, values: newValues, sequelizeOptions }
-    )
+    return createEnum({
+      queryInterface,
+      name: newEnumName,
+      values: newValues,
+      sequelizeOptions: newSequelizeOptions
+    })
       // Drop default value (ALTER COLUMN cannot cast default values)
-      .then(() => defaultValue && unsetDefaultValueFromEnum(
-        { queryInterface, tableName, columnName, sequelizeOptions }
-      ))
+      .then(() => defaultValue && unsetDefaultValueFromEnum({
+        queryInterface,
+        tableName,
+        columnName,
+        sequelizeOptions: newSequelizeOptions
+      }))
       // Change column type to the new ENUM TYPE
       .then(() => setColumnTypeToEnum({
         tableName,
         columnName,
         enumName: newEnumName,
         queryInterface,
-        sequelizeOptions
+        sequelizeOptions: newSequelizeOptions
       }))
       // Drop old ENUM
       .then(() => dropEnum(
-        { name: enumName, sequelizeOptions, queryInterface }
+        {
+          name: enumName,
+          sequelizeOptions: newSequelizeOptions,
+          queryInterface
+        }
       ))
       // Rename new ENUM name
       .then(() => renameEnum({
         oldEnumName: newEnumName,
         newEnumName: enumName,
         queryInterface,
-        sequelizeOptions
+        sequelizeOptions: newSequelizeOptions
       }))
       .then(() => defaultValue && setColumnDefault({
         tableName,
@@ -61,7 +75,7 @@ export default (args) => {
         defaultValue,
         defaultValueType: enumName,
         queryInterface,
-        sequelizeOptions
+        sequelizeOptions: newSequelizeOptions
       }));
   });
 };
