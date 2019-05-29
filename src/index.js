@@ -45,7 +45,9 @@ export default (args) => {
         sequelizeOptions
       }))
       // Drop old ENUM
-      .then(() => dropEnum({ enumName, sequelizeOptions, queryInterface }))
+      .then(() => dropEnum(
+        { name: enumName, sequelizeOptions, queryInterface }
+      ))
       // Rename new ENUM name
       .then(() => renameEnum({
         oldEnumName: newEnumName,
@@ -165,14 +167,14 @@ export function getQueryToSetEnumType(tableName, columnName, enumName) {
  *
  * @param {Object} args
  * @param {Object} args.queryInterface
- * @param {String} args.enumName
+ * @param {String} args.name
  * @param {Object} args.sequelizeOptions
  *
  * @return {Promise}
  */
 export function dropEnum(args) {
   return args.queryInterface.sequelize.query(
-    getQueryToDropEnum(args.enumName),
+    getQueryToDropEnum(args.name),
     args.sequelizeOptions
   );
 }
@@ -180,12 +182,12 @@ export function dropEnum(args) {
 /**
  * Get the query to drop an Enum.
  *
- * @param {String} enumName
+ * @param {String} name
  *
  * @return {String}
  */
-export function getQueryToDropEnum(enumName) {
-  return `DROP TYPE "${enumName}"`;
+export function getQueryToDropEnum(name) {
+  return `DROP TYPE "${name}"`;
 }
 
 /**
