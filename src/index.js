@@ -20,38 +20,54 @@ export default (args) => {
     defaultValue,
     newValues,
     queryInterface,
+    sequelizeOptions = {},
     enumName = `enum_${tableName}_${columnName}`
   } = args;
 
   const newEnumName = `${enumName}_new`;
 
-  return queryInterface.sequelize.transaction((t) => {
-    const sequelizeOptions = { transaction: t };
+  return queryInterface.sequelize.transaction(sequelizeOptions, (t) => {
+    const newSequelizeOptions = {
+      ...(sequelizeOptions || {}),
+      transaction: t
+    };
 
     // Create a copy of the type
-    return createEnum(
-      { queryInterface, name: newEnumName, values: newValues, sequelizeOptions }
-    )
+    return createEnum({
+      queryInterface,
+      name: newEnumName,
+      values: newValues,
+      sequelizeOptions: newSequelizeOptions
+    })
       // Drop default value (ALTER COLUMN cannot cast default values)
-      .then(() => defaultValue && unsetDefaultValueFromEnum(
-        { queryInterface, tableName, columnName, sequelizeOptions }
-      ))
+      .then(() => defaultValue && unsetDefaultValueFromEnum({
+        queryInterface,
+        tableName,
+        columnName,
+        sequelizeOptions: newSequelizeOptions
+      }))
       // Change column type to the new ENUM TYPE
       .then(() => setColumnTypeToEnum({
         tableName,
         columnName,
         enumName: newEnumName,
         queryInterface,
-        sequelizeOptions
+        sequelizeOptions: newSequelizeOptions
       }))
       // Drop old ENUM
-      .then(() => dropEnum({ enumName, sequelizeOptions, queryInterface }))
+      .then(() => dropEnum(
+        {
+          name: enumName,
+          sequelizeOptions: newSequelizeOptions,
+          queryInterface
+        }
+      ))
       // Rename new ENUM name
       .then(() => renameEnum({
         oldEnumName: newEnumName,
         newEnumName: enumName,
         queryInterface,
-        sequelizeOptions
+        sequelizeOptions: newSequelizeOptions
       }))
       .then(() => defaultValue && setColumnDefault({
         tableName,
@@ -59,7 +75,7 @@ export default (args) => {
         defaultValue,
         defaultValueType: enumName,
         queryInterface,
-        sequelizeOptions
+        sequelizeOptions: newSequelizeOptions
       }));
   });
 };
@@ -165,14 +181,14 @@ export function getQueryToSetEnumType(tableName, columnName, enumName) {
  *
  * @param {Object} args
  * @param {Object} args.queryInterface
- * @param {String} args.enumName
+ * @param {String} args.name
  * @param {Object} args.sequelizeOptions
  *
  * @return {Promise}
  */
 export function dropEnum(args) {
   return args.queryInterface.sequelize.query(
-    getQueryToDropEnum(args.enumName),
+    getQueryToDropEnum(args.name),
     args.sequelizeOptions
   );
 }
@@ -180,12 +196,12 @@ export function dropEnum(args) {
 /**
  * Get the query to drop an Enum.
  *
- * @param {String} enumName
+ * @param {String} name
  *
  * @return {String}
  */
-export function getQueryToDropEnum(enumName) {
-  return `DROP TYPE "${enumName}"`;
+export function getQueryToDropEnum(name) {
+  return `DROP TYPE "${name}"`;
 }
 
 /**
