@@ -11,7 +11,8 @@
     "format:prettier": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,test}/**/*.ts\"",
     "fix": "yarn format:prettier && yarn format:eslint",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -53,7 +54,8 @@
     "prettier": "^2.7.1",
     "sinon": "^14.0.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "husky": "^6.0.0"
   },
   "peerDependencies": {
     "sequelize": "^6.0.0"
