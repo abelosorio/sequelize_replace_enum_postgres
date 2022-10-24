@@ -2,55 +2,50 @@ import { removeWhiteSpace } from './_test-utils'
 import { describe, it } from 'mocha'
 import { expect } from 'chai'
 import {
-  getQueryToCreateEnum,
-  getQueryToDropEnum,
-  getQueryToRemoveDefaultFromColumn,
-  getQueryToRenameEnum,
-  getQueryToSetEnumType,
-  getQueryToSetColumnDefault,
-} from '../src/index'
+  createEnum,
+  dropEnum,
+  removeDefaultFromColumn,
+  renameEnum,
+  setEnumType,
+  setColumnDefault,
+} from '../src/queries'
 
 describe('queries:', () => {
-  it('getQueryToCreateEnum()', () => {
-    expect(getQueryToCreateEnum('enum1', ['A', 'B'])).to.equal(
+  it('createEnum()', () => {
+    expect(createEnum('enum1', ['A', 'B'])).to.equal(
       `CREATE TYPE "enum1" AS ENUM ('A', 'B')`,
     )
   })
 
-  it('getQueryToDropEnum()', () => {
-    expect(getQueryToDropEnum('enum1')).to.equal(`DROP TYPE "enum1"`)
+  it('dropEnum()', () => {
+    expect(dropEnum('enum1')).to.equal(`DROP TYPE "enum1"`)
   })
 
-  it('getQueryToRemoveDefaultFromColumn()', () => {
-    expect(getQueryToRemoveDefaultFromColumn('enum1', 'column1')).to.equal(
+  it('removeDefaultFromColumn()', () => {
+    expect(removeDefaultFromColumn('enum1', 'column1')).to.equal(
       `ALTER TABLE "enum1" ALTER COLUMN "column1" DROP DEFAULT`,
     )
   })
 
-  it('getQueryToRenameEnum()', () => {
-    expect(getQueryToRenameEnum('enum1', 'enumNew1')).to.equal(
+  it('renameEnum()', () => {
+    expect(renameEnum('enum1', 'enumNew1')).to.equal(
       `ALTER TYPE "enum1" RENAME TO "enumNew1"`,
     )
   })
 
-  it('getQueryToSetEnumType()', () => {
+  it('setEnumType()', () => {
     expect(
-      removeWhiteSpace(getQueryToSetEnumType('table1', 'column1', 'enum1')),
+      removeWhiteSpace(setEnumType('table1', 'column1', 'enum1')),
     ).to.equal(
       ` ALTER TABLE "table1" ALTER COLUMN "column1" TYPE "enum1"` +
         ` USING ("column1"::text::"enum1") `,
     )
   })
 
-  it('getQueryToSetColumnDefault()', () => {
+  it('setColumnDefault()', () => {
     expect(
       removeWhiteSpace(
-        getQueryToSetColumnDefault(
-          'table1',
-          'column1',
-          'defaultVal1',
-          'STRING',
-        ),
+        setColumnDefault('table1', 'column1', 'defaultVal1', 'STRING'),
       ),
     ).to.equal(
       ` ALTER TABLE "table1" ALTER COLUMN "column1"` +
