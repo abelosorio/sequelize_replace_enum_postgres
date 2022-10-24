@@ -5,9 +5,9 @@ This package provides the methods needed to replace a **PostgreSQL** ENUM in **S
 ## Install
 
 ```bash
-npm install --save sequelize-replace-enum-postgres
+npm install --save @chimanos/sequelize-replace-enum-postgres
 #OR
-yarn add sequelize-replace-enum-postgres
+yarn add @chimanos/sequelize-replace-enum-postgres
 ```
 
 ## How to use
@@ -17,7 +17,7 @@ yarn add sequelize-replace-enum-postgres
 In this migration we are adding the `on-demand` value to the `recurrenceType` field of `eventRecurrence`:
 
 ```js
-const replaceEnum = require('sequelize-replace-enum-postgres')
+const replaceEnum = require('@chimanos/sequelize-replace-enum-postgres')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -50,7 +50,7 @@ The library is build, has full and first class typescript support.
 
 ```ts
 import { QueryInterface, Sequelize } from 'sequelize'
-import replaceEnum from 'sequelize-replace-enum-postgres'
+import replaceEnum from '@chimanos/sequelize-replace-enum-postgres'
 
 module.exports = {
   up: (queryInterface: QueryInterface, Sequelize: typeof Sequelize) => {
@@ -131,4 +131,4 @@ await queryInterface.sequelize.transaction(async t => {
 
 ## Issues
 
-  * https://github.com/abelosorio/sequelize_replace_enum_postgres/issues
+  * https://github.com/cyrilchapon/sequelize_replace_enum_postgres/issues
