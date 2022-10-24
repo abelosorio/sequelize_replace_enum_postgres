@@ -14,10 +14,8 @@ npm install --save sequelize-replace-enum-postgres
 
 In this migration we are adding the `on-demand` value to the `recurrenceType` field of `eventRecurrence`:
 
-```
-'use strict';
-
-const replaceEnum = require('sequelize-replace-enum-postgres').default;
+```js
+const replaceEnum = require('sequelize-replace-enum-postgres');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -40,7 +38,6 @@ module.exports = {
     });
   }
 };
-
 ```
 
 ## Mantainers
