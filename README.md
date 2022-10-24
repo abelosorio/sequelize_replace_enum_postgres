@@ -21,8 +21,7 @@ const replaceEnum = require('sequelize-replace-enum-postgres').default;
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return replaceEnum({
-      queryInterface,
+    return replaceEnum(queryInterface)({
       tableName: 'eventRecurrence',
       columnName: 'recurrenceType',
       defaultValue: 'weekly',
@@ -32,8 +31,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return replaceEnum({
-      queryInterface,
+    return replaceEnum(queryInterface)({
       tableName: 'eventRecurrence',
       columnName: 'recurrenceType',
       defaultValue: 'weekly',
@@ -48,6 +46,7 @@ module.exports = {
 ## Mantainers
 
   * **[Abel M. Osorio](https://github.com/abelosorio)**
+  * **[Cyril CHAPON](https://github.com/cyrilchapon)**
 
 ## Issues
 
