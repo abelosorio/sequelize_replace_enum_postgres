@@ -4,6 +4,7 @@
   "description": "This package provides the methods needed to replace a PostgreSQL ENUM in Sequelize migrations.",
   "main": "dist/index.js",
   "types": "src/index.ts",
+  "private": false,
   "scripts": {
     "test": "mocha --require ts-node/register --extensions ts,tsx 'test/**/*.test.{ts,tsx}'",
     "test:watch": "mocha --require ts-node/register --extensions ts,tsx --watch --watch-files src 'test/**/*.test.{ts,tsx}'",
