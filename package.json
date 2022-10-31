@@ -1,23 +1,21 @@
 {
   "name": "sequelize-replace-enum-postgres",
-  "version": "1.6.0",
+  "version": "2.0.1",
   "description": "This package provides the methods needed to replace a PostgreSQL ENUM in Sequelize migrations.",
-  "main": "build/index.js",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "private": false,
   "scripts": {
-    "test": "mocha",
-    "test:watch": "npm run test -- --watch",
-    "build": "babel src -D -s -d build",
-    "lint:src": "eslint src",
-    "lint:src:fix": "npm run lint:src -- --fix",
-    "lint:test": "eslint test --config .eslintrc.test.js",
-    "lint:test:fix": "npm run lint:test -- --fix",
-    "lint": "npm run lint:src && npm run lint:test",
-    "lint:fix": "npm run lint:src:fix && npm run lint:test:fix",
-    "prepublishOnly": "npm run build"
+    "test": "mocha --require ts-node/register --extensions ts,tsx 'test/**/*.test.{ts,tsx}'",
+    "test:watch": "mocha --require ts-node/register --extensions ts,tsx --watch --watch-files src 'test/**/*.test.{ts,tsx}'",
+    "build": "tsc --project tsconfig.json",
+    "format:eslint": "yarn lint --fix",
+    "format:prettier": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,test}/**/*.ts\"",
+    "fix": "yarn format:prettier && yarn format:eslint",
+    "prepublishOnly": "yarn build",
+    "prepare": "husky install"
   },
-  "pre-commit": [
-    "lint"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abelosorio/sequelize_replace_enum_postgres.git"
@@ -30,22 +28,36 @@
     "Sequelize"
   ],
   "author": "Abel M. Osorio <abel.m.osorio@gmail.com>",
+  "contributors": [
+    "Cyril Chapon <chpn.cyril@gmail.com>"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/abelosorio/sequelize_replace_enum_postgres/issues"
   },
   "homepage": "https://github.com/abelosorio/sequelize_replace_enum_postgres#readme",
   "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/register": "^7.0.0",
+    "@types/chai": "^4.3.3",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.11.4",
+    "@types/sequelize": "^4.28.14",
+    "@types/sinon": "^10.0.13",
+    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "@typescript-eslint/parser": "^5.41.0",
     "babel-eslint": "^10.0.1",
     "chai": "^4.1.2",
-    "eslint": "^5.16.0",
-    "eslint-config-google": "^0.9.1",
+    "eslint": "^8.26.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^6.0.0",
     "mocha": "^10.1.0",
-    "pre-commit": "^1.2.2",
-    "sinon": "^4.5.0"
-  }
+    "prettier": "^2.7.1",
+    "sinon": "^14.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  },
+  "peerDependencies": {
+    "sequelize": "^6.0.0"
+  },
+  "dependencies": {}
 }
