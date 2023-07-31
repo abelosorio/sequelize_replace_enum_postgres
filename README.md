@@ -45,7 +45,7 @@ module.exports = {
 
 ```
 
-## Mantainers
+## Maintainers
 
   * **[Abel M. Osorio](https://github.com/abelosorio)**
 
